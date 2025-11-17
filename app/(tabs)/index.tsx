@@ -25,11 +25,6 @@ export default function HomeScreen() {
     setRefreshing(false)
   }
 
-  const handleProductPress = (item: any) => {
-    console.log('Product pressed:', item)
-    // Navigate to product detail screen
-    // router.push(`/product/${item.id}`)
-  }
 
   const handleViewAll = (category: string) => {
     console.log('View all pressed for:', category)
@@ -58,7 +53,7 @@ export default function HomeScreen() {
             title="Featured Products"
             subtitle="Handpicked for you"
             products={featuredProducts.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('featured')}
           />
         )}
@@ -68,7 +63,7 @@ export default function HomeScreen() {
             title="Best Sellers"
             subtitle="Most popular items"
             products={bestSellerProducts.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('bestsellers')}
           />
         )}
@@ -78,7 +73,7 @@ export default function HomeScreen() {
             title="New Arrivals"
             subtitle="Latest additions"
             products={newArrivals.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('new')}
           />
         )}
@@ -88,7 +83,7 @@ export default function HomeScreen() {
             title="Electronics"
             subtitle="Tech essentials"
             products={electronicsProducts.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('electronics')}
           />
         )}
@@ -98,7 +93,7 @@ export default function HomeScreen() {
             title="Fashion"
             subtitle="Style & trends"
             products={fashionProducts.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('fashion')}
           />
         )}
@@ -108,7 +103,7 @@ export default function HomeScreen() {
             title="Home & Living"
             subtitle="Comfort & decor"
             products={homeProducts.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('home')}
           />
         )}
@@ -118,7 +113,7 @@ export default function HomeScreen() {
             title="Free Delivery"
             subtitle="No shipping charges"
             products={freeDeliveryProducts.slice(0, 10)}
-            onPressItem={handleProductPress}
+            onPressItem={() => {}}
             onViewAll={() => handleViewAll('free-delivery')}
           />
         )}

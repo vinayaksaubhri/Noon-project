@@ -1,52 +1,41 @@
 import { Product } from '@/types/product'
+import { useRouter } from 'expo-router'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 type Props = {
   item: Product
-  onPress: () => void
+  onPress?: () => void
 }
 
 export default function ProductCard({ item, onPress }: Props) {
-  const renderTags = () => {
-    const tags = []
-    
-    if (item.hasFreeDelivery) {
-      tags.push('Free Delivery')
-    }
-    
-    if (item.isBestSeller) {
-      tags.push('Selling Fast')
-    }
-    
-    if (item.isNew) {
-      tags.push('New')
-    }
-    
-    if (item.discount && item.discount > 0) {
-      tags.push(`${item.discount}% OFF`)
-    }
-    
-    return tags.slice(0, 2) // Show max 2 tags
-  }
+  const router = useRouter()
 
-  const getTagStyle = (tag: string) => {
-    const baseStyle = styles.tag
-    switch (tag) {
-      case 'Free Delivery':
-        return [baseStyle, styles.tagFreeDelivery]
-      case 'Selling Fast':
-        return [baseStyle, styles.tagSellingFast]
-      case 'New':
-        return [baseStyle, styles.tagNew]
-      default:
-        return [baseStyle, styles.tagDefault]
+  const handlePress = () => {
+    if (onPress) {
+      onPress()
+    } else {
+      router.push(`/product/${item.id}`)
     }
   }
 
-  const tags = renderTags()
+  const tags = []
+  
+  if (item.hasFreeDelivery) tags.push('Free Delivery')
+  if (item.isBestSeller) tags.push('Selling Fast')
+  if (item.isNew) tags.push('New')
+  if (item.discount && item.discount > 0) tags.push(`${item.discount}% OFF`)
+  
+  const displayTags = tags.slice(0, 2)
+
+  const getTagColor = (tag: string) => {
+    if (tag === 'Free Delivery') return '#00c851'
+    if (tag === 'Selling Fast') return '#ff8800'
+    if (tag === 'New') return '#007bff'
+    return '#6c757d'
+  }
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={handlePress} style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: item.thumbnail }}
@@ -77,10 +66,10 @@ export default function ProductCard({ item, onPress }: Props) {
         )}
       </View>
 
-      {tags.length > 0 && (
+      {displayTags.length > 0 && (
         <View style={styles.tagsContainer}>
-          {tags.map((tag, index) => (
-            <View key={index} style={getTagStyle(tag)}>
+          {displayTags.map((tag, index) => (
+            <View key={index} style={[styles.tag, { backgroundColor: getTagColor(tag) }]}>
               <Text style={styles.tagText}>
                 {tag}
               </Text>
@@ -173,18 +162,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 10,
-  },
-  tagFreeDelivery: {
-    backgroundColor: '#00c851',
-  },
-  tagSellingFast: {
-    backgroundColor: '#ff8800',
-  },
-  tagNew: {
-    backgroundColor: '#007bff',
-  },
-  tagDefault: {
-    backgroundColor: '#6c757d',
   },
   tagText: {
     color: '#fff',

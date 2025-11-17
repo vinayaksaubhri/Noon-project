@@ -1,13 +1,13 @@
 import { Ionicons } from '@expo/vector-icons'
 import React, { useMemo, useState } from 'react'
 import {
-    FlatList,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import SearchProductCard from '../../components/search/SearchProductCard'
 import { searchProducts } from '../../data/mock'
@@ -32,11 +32,6 @@ export default function SearchScreen() {
     )
   }, [searchQuery])
 
-  const handleProductPress = (product: Product) => {
-    console.log('Product pressed:', product.name)
-    // Navigate to product detail screen
-    // router.push(`/product/${product.id}`)
-  }
 
   const clearSearch = () => {
     setSearchQuery('')
@@ -46,7 +41,6 @@ export default function SearchScreen() {
     <View style={styles.productItem}>
       <SearchProductCard
         item={item}
-        onPress={() => handleProductPress(item)}
       />
     </View>
   )

@@ -55,7 +55,7 @@ export default function ProductCarousel({
         snapToInterval={176} // Card width (160) + margin (16)
         snapToAlignment="start"
         renderItem={({ item }) => (
-          <ProductCard item={item} onPress={() => onPressItem(item)} />
+          <ProductCard item={item} />
         )}
         getItemLayout={(data, index) => ({
           length: 176,
