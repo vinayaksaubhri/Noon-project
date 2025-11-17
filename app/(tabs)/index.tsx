@@ -1,31 +1,27 @@
-import { StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router'
+import { ScrollView } from 'react-native'
+import BannerCarousel from '../../components/home/BannerCarousel'
+import ProductCarousel from '../../components/home/ProductCarousel'
+import useProducts from '../../hooks/useProducts'
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+export default function HomeScreen() {
+  const products = useProducts()
+  const router = useRouter()
 
-export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
-  );
-}
+    <ScrollView style={{ flex: 1, padding: 16 }}>
+      <BannerCarousel />
+      <ProductCarousel
+        title="Featured"
+        products={products}
+                onPressItem={(item) => console.log(item)}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+      />
+      <ProductCarousel
+        title="Best Sellers"
+        products={products}
+        onPressItem={(item) => console.log(item)}
+      />
+    </ScrollView>
+  )
+}
