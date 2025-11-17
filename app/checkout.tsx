@@ -2,15 +2,15 @@ import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
 import {
-    FlatList,
-    Image,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
-import { useCart } from '../contexts/CartContext'
+import { useCart } from '../stores/useCart'
 
 type PaymentMethod = 'card' | 'upi' | 'cod'
 

@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { useCart } from '../../contexts/CartContext'
+import { useCart } from '../../stores/useCart'
 
 export default function CartScreen() {
   const { items, addToCart, removeFromCart, clearCart, getTotalItems } = useCart()

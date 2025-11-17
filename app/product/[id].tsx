@@ -2,16 +2,16 @@ import { Ionicons } from '@expo/vector-icons'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import React from 'react'
 import {
-    Image,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
-import { useCart } from '../../contexts/CartContext'
 import { mockProducts, searchProducts } from '../../data/mock'
+import { useCart } from '../../stores/useCart'
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()

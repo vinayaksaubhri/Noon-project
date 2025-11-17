@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Colors from '@/constants/Colors';
-import { useCart } from '@/contexts/CartContext';
+import { useCart } from '@/stores/useCart';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
