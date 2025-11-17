@@ -310,10 +310,6 @@ const mockProducts: Product[] = [
 export const fetchBanners = async (): Promise<Banner[]> => {
   await delay(Math.random() * 500 + 500) // 500-1000ms delay
   
-  if (shouldSimulateError()) {
-    throw new Error('Failed to fetch banners. Please try again.')
-  }
-  
   return mockBanners.filter(banner => banner.isActive)
     .sort((a, b) => a.priority - b.priority)
 }
@@ -358,9 +354,6 @@ export const fetchProducts = async (params?: {
 export const fetchProductById = async (id: string): Promise<Product> => {
   await delay(Math.random() * 300 + 200) // 200-500ms delay
   
-  if (shouldSimulateError()) {
-    throw new Error('Failed to fetch product details. Please try again.')
-  }
   
   const product = mockProducts.find(p => p.id === id)
   
@@ -374,10 +367,6 @@ export const fetchProductById = async (id: string): Promise<Product> => {
 export const fetchFeaturedProducts = async (): Promise<Product[]> => {
   await delay(Math.random() * 400 + 600) // 600-1000ms delay
   
-  if (shouldSimulateError()) {
-    throw new Error('Failed to fetch featured products. Please try again.')
-  }
-  
   return mockProducts
     .filter(product => product.isBestSeller || product.isNew)
     .slice(0, 8)
@@ -385,10 +374,6 @@ export const fetchFeaturedProducts = async (): Promise<Product[]> => {
 
 export const fetchProductsByCategory = async (category: string): Promise<Product[]> => {
   await delay(Math.random() * 400 + 600) // 600-1000ms delay
-  
-  if (shouldSimulateError()) {
-    throw new Error(`Failed to fetch ${category} products. Please try again.`)
-  }
   
   return mockProducts
     .filter(product => product.category.toLowerCase() === category.toLowerCase())
