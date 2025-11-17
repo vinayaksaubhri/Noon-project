@@ -2,6 +2,11 @@
 
 A modern e-commerce mobile application built with React Native, Expo, and TypeScript. Features product browsing, search functionality, shopping cart, and checkout process.
 
+## DEMO video
+
+[![Watch the video](https://img.shields.io/badge/Watch%20Demo-Video-blue?style=for-the-badge)](https://drive.google.com/file/d/1c4n9s8gmISjwJRJ8Wn3odp5PLPH88B-o/view?usp=sharing)
+
+
 ## 🚀 Features
 
 - **Product Catalog**: Browse products with detailed information
