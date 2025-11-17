@@ -5,10 +5,9 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native'
+import SearchBar from '../../components/search/SearchBar'
 import SearchProductCard from '../../components/search/SearchProductCard'
 import { searchProducts } from '../../data/mock'
 import { Product } from '../../types/product'
@@ -45,9 +44,19 @@ export default function SearchScreen() {
     </View>
   )
 
-  const renderEmptyState = () => {
-    if (!searchQuery.trim()) {
-      return (
+  return (
+    <SafeAreaView style={styles.container}>
+      <SearchBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onFocus={() => setIsSearchFocused(true)}
+        onBlur={() => setIsSearchFocused(false)}
+        onClear={clearSearch}
+        isFocused={isSearchFocused}
+      />
+
+      {/* Early return for empty search query */}
+      {!searchQuery.trim() && (
         <View style={styles.emptyState}>
           <Ionicons name="search" size={64} color="#ccc" />
           <Text style={styles.emptyStateTitle}>Search for products</Text>
@@ -55,45 +64,21 @@ export default function SearchScreen() {
             Try searching for "iPhone", "Nike", "MacBook", or "IKEA"
           </Text>
         </View>
-      )
-    }
+      )}
 
-    return (
-      <View style={styles.emptyState}>
-        <Ionicons name="search" size={64} color="#ccc" />
-        <Text style={styles.emptyStateTitle}>No products found</Text>
-        <Text style={styles.emptyStateSubtitle}>
-          Try searching with different keywords
-        </Text>
-      </View>
-    )
-  }
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={[styles.searchContainer, isSearchFocused && styles.searchContainerFocused]}>
-          <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search products..."
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
-            returnKeyType="search"
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-          {searchQuery.length > 0 && (
-            <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
-              <Ionicons name="close-circle" size={20} color="#666" />
-            </TouchableOpacity>
-          )}
+      {/* Early return for no results */}
+      {searchQuery.trim() && filteredProducts.length === 0 && (
+        <View style={styles.emptyState}>
+          <Ionicons name="search" size={64} color="#ccc" />
+          <Text style={styles.emptyStateTitle}>No products found</Text>
+          <Text style={styles.emptyStateSubtitle}>
+            Try searching with different keywords
+          </Text>
         </View>
-      </View>
+      )}
 
-      {filteredProducts.length > 0 ? (
+      {/* Results */}
+      {filteredProducts.length > 0 && (
         <View style={styles.resultsContainer}>
           <Text style={styles.resultsCount}>
             {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} found
@@ -108,8 +93,6 @@ export default function SearchScreen() {
             showsVerticalScrollIndicator={false}
           />
         </View>
-      ) : (
-        renderEmptyState()
       )}
     </SafeAreaView>
   )
@@ -119,39 +102,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
-  },
-  header: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e9ecef',
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: '#e9ecef',
-  },
-  searchContainerFocused: {
-    borderColor: '#007bff',
-    backgroundColor: '#fff',
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: '#333',
-    paddingVertical: 4,
-  },
-  clearButton: {
-    padding: 4,
   },
   resultsContainer: {
     flex: 1,
