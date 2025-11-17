@@ -28,8 +28,6 @@ export default function HomeScreen() {
 
   const handleViewAll = (category: string) => {
     console.log('View all pressed for:', category)
-    // Navigate to category screen
-    // router.push(`/category/${category}`)
   }
 
   const bestSellerProducts = featuredProducts.filter(p => p.isBestSeller)
