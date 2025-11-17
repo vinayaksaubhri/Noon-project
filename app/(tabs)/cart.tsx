@@ -1,13 +1,14 @@
 import { Ionicons } from '@expo/vector-icons'
+import { router } from 'expo-router'
 import React from 'react'
 import {
-    FlatList,
-    Image,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import { useCart } from '../../contexts/CartContext'
 
@@ -87,7 +88,10 @@ export default function CartScreen() {
               <Text style={styles.totalPrice}>₹{getTotalPrice()}</Text>
             </View>
             
-            <TouchableOpacity style={styles.checkoutButton}>
+            <TouchableOpacity
+              style={styles.checkoutButton}
+              onPress={() => router.push('/checkout')}
+            >
               <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
             </TouchableOpacity>
           </View>
